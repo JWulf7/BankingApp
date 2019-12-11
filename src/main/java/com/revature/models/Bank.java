@@ -14,23 +14,26 @@ public class Bank {
 		//welcomeScreen();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please press enter...");
-		String input = scan.nextLine();
+		String input = scan.nextLine().split(" ")[0];
 		
 		while(!input.toUpperCase().equals("Q")) {
 			welcomeScreen();
-			 input = scan.next();
+			 input = scan.nextLine().split(" ")[0];
 			switch (input) {
 			case "1" : 
+				scan.close();								// new close
 				int employeeCheck = existingUserLogin();
 				switch (employeeCheck) {
 				case 1 :
 					existingUserLoginCustomer();
+					break;
 				case 2 :
 					existingUserLoginEmployee();
 					break;
 				}
 				break;
 			case "2" :
+				scan.close();								// new close
 				Customer newCust = createNewCustomer();	// returns a new customer with a username and a password
 				setNewUserFields(newCust);
 				break;
@@ -80,21 +83,26 @@ public class Bank {
 		System.out.println("Please select:   1. Customer");
 		System.out.println("       or        2. Employee");
 		Scanner scan = new Scanner(System.in);
-		int employeeCheck = scan.nextInt();
+		//int employeeCheck = Integer.parseInt(scan.nextLine().split(" ")[0]);							// commented this out
+		int employeeCheck = scan.nextInt();					// new nextint
+		scan.close();   														// new close
 		if(employeeCheck == 1 || employeeCheck == 2) {
 			//System.out.println("employee check returned a number");
-			scan.close();
+			//scan.close();														// new comment out
 			return employeeCheck;
 		}
 		else {
 			while(employeeCheck != 1 || employeeCheck != 2) {
+			Scanner scan2 = new Scanner(System.in);
 			System.out.println("Please enter an appropriate selection:");
 			System.out.println("Please select:   1. Customer");
-			System.out.println("       or        2. Employee");
-			employeeCheck = scan.nextInt();
+			System.out.println("       or        2. Employee");						// vv~~~~~ commented this out
+			//employeeCheck = Integer.parseInt(scan2.nextLine().split(" ")[0]);	// also created new scanner and renamed this line scan2
+			employeeCheck = scan2.nextInt();
+			scan2.close(); 														// new close
 			}
 		}
-		scan.close();
+		//scan.close();
 		return 0;
 	}
 	
@@ -102,13 +110,18 @@ public class Bank {
 		Customer thisCustomer = new Customer();
 		System.out.println("please enter your username:");
 		Scanner scan = new Scanner(System.in);
+	//	if(scan.hasNextLine()) {
 		String loginName = scan.nextLine();
+		scan.close(); 														// new close
 		thisCustomer.setUserName(loginName);
+	//	}
 		System.out.println("please enter your password:");
-		
-		String loginPass = scan.nextLine();
+		//if(scan.hasNextLine()) {
+		Scanner scan2 = new Scanner(System.in);								// new scanner
+		String loginPass = scan2.nextLine();								// renamed scan2
+		scan2.close();
 		thisCustomer.setPassword(loginPass);
-		
+		//}
 		System.out.println("returned a customer object with username and password");
 		scan.close();
 		return thisCustomer;
@@ -120,11 +133,14 @@ public class Bank {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("I think it good till here");
 		String loginName = scan.nextLine();
+		scan.close(); 													// new close
 		
 		
 		thisEmployee.setUserName(loginName);
 		System.out.println("please enter your password:");
-		String loginPass = scan.nextLine();
+		Scanner scan2 = new Scanner(System.in); 							// new scanner
+		String loginPass = scan2.nextLine();								// renamed scan2
+		scan2.close(); 															// new close
 		thisEmployee.setPassword(loginPass);
 		System.out.println("returned a employee object with username and password");
 		scan.close();
@@ -138,26 +154,34 @@ public class Bank {
 				+ "*must be atleast 6 characters long");
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
+		scan.close(); 														// new close
 		while(!userNameIsAcceptable(input)) {
 			System.out.println("Usernames must be atleast 6 characters long...");
 			System.out.println("Please try another username:");
-			input = scan.nextLine();
+			Scanner scan2 = new Scanner(System.in);							// new scanner
+			input = scan2.nextLine();										// renamed
+			scan2.close();													// new close
 		}
 		if(userNameIsAcceptable(input)) {
 			customer.setUserName(input);
 		}
 		System.out.println("Please select a password: \n"
 				+ "*must be atleast 6 characters long and contain: 1 uppercase letter, 1 lowercase letter, and 1 digit 0-9");
-		String input2 = scan.nextLine();
+		Scanner scan5 = new Scanner(System.in); 						// new scanner
+		String input2 = scan5.nextLine();								// renamed scan
+		scan5.close(); 														// new close
 		while(!userPasswordIsAcceptable(input2)) {
 			System.out.println("Passwords must be 6 characters long and contain atleast: 1 uppercase letter, 1 lowercase letter, and 1 digit 0-9...");
 			System.out.println("Please try another password:");
-			input = scan.nextLine();
+			Scanner scan4 = new Scanner(System.in);							// new scanner
+			input2 = scan4.nextLine();												// renamed scan, also changed input to input2
+			scan4.close(); 														// new close
 		}
 		if(userPasswordIsAcceptable(input2)) {
 			System.out.println("Please verify password:");
 			Scanner scan3 = new Scanner(System.in);
 			String input3 = scan3.nextLine();
+			scan3.close(); 															// new close
 			if(input2.equals(input3)) {
 				customer.setPassword(input2);
 			} else {
@@ -198,30 +222,41 @@ public class Bank {
 		System.out.println("First Name:");
 		Scanner scan = new Scanner(System.in);
 		String typeFirstName = scan.nextLine();
+		scan.close(); 															// new close
 		if(!typeFirstName.equals("")) {
 			newCustomer.setFirstName(typeFirstName);
 		} else {
 			while(typeFirstName.equals("")) {
 				System.out.println("Please enter your first name:");
-				typeFirstName = scan.nextLine();
+				Scanner scan2 = new Scanner(System.in);							// new scanner
+				typeFirstName = scan2.nextLine();											//renamed scan
+				scan2.close(); 														// new close
 			}
 		}
-		String typeLastName = scan.nextLine();
+		Scanner scan3 = new Scanner(System.in);							// new scanner
+		String typeLastName = scan3.nextLine();							// renamed scan
+		scan3.close(); 														// new close
 		if(!typeLastName.equals("")) {
 			newCustomer.setLastName(typeLastName);
 		} else {
 			while(typeLastName.equals("")) {
 				System.out.println("Please enter your last name:");
-				typeLastName = scan.nextLine();
+				Scanner scan4 = new Scanner(System.in);					// new scanner
+				typeLastName = scan4.nextLine();						// renamed scan
+				scan4.close(); 														// new close
 			}
 		}
-		String typeAddress = scan.nextLine();
+		Scanner scan5 = new Scanner(System.in); 							// new scanner
+		String typeAddress = scan5.nextLine();								// renamed scan
+		scan5.close(); 													// new close
 		if(!typeAddress.equals("")) {
 			newCustomer.setAddress(typeAddress);
 		} else {
 			while(typeAddress.equals("")) {
 				System.out.println("Please enter your address:");
-				typeAddress = scan.nextLine();
+				Scanner scan6 = new Scanner(System.in); 							// new scanner
+				typeAddress = scan6.nextLine();													// renamed scan
+				scan6.close(); 																	// new close
 			}
 		}
 		return newCustomer;

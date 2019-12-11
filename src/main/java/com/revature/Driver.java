@@ -17,12 +17,12 @@ public class Driver {
 				// check if type of employee or customer
 					// if employee give them employee access
 					// if customer, give them access to view their account, transactions, and deposit, withdraw, and transfer
-				Scanner scan = new Scanner(System.in);
+				//Scanner scan = new Scanner(System.in);   				commented out
 				
 				Bank bank = new Bank();
 				bank.startHere();
 				
-				scan.close();
+				//scan.close();											commented out
 
 	}
 
