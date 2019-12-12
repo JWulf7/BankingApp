@@ -1,5 +1,8 @@
 package com.revature.models;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Bank {
@@ -25,7 +28,9 @@ public class Bank {
 				int employeeCheck = existingUserLogin();
 				switch (employeeCheck) {
 				case 1 :
-					existingUserLoginCustomer();
+					Customer signInCustomer = existingUserLoginCustomer();
+					
+					existingCustomerMainMenu(signInCustomer);
 					break;
 				case 2 :
 					existingUserLoginEmployee();
@@ -261,7 +266,57 @@ public class Bank {
 				//scan6.close(); 																	// new close
 			}
 		}
+		System.out.println("Your account is pending... admin will contact you when your account is approved or denied. \nThank You");
+		System.out.println("Press enter to exit");
+		scan.nextLine();
 		return newCustomer;
 	}
+
+	public void existingCustomerMainMenu(Customer customer) {
+		
+		userFriendlyDate();
+		//System.out.println("\n ");
+		System.out.println("Welcome back, " + customer.getFirstName() + ".");
+		//System.out.println("\n");
+		System.out.println("Accounts:");
+		existingCustomerAcountsDisplay(customer);
+		System.out.println("\n");
+	}
+	
+	public void userFriendlyDate() {
+		Date dateObj = new Date();
+		String dateFormat = "EEEE, MMM d, y      h:mm a ";
+		SimpleDateFormat simpleDF = new SimpleDateFormat(dateFormat);
+		System.out.println(simpleDF.format(dateObj));
+	}
+	
+	public BankAccount existingCustomerAcountsDisplay(Customer customer) {
+		System.out.println("________");
+		int x = 1;
+		System.out.println("Please select an account:");
+		for(BankAccount account : customer.getUserAccounts()) {
+			int accountName = account.getAccountNumber();
+			double accountBalance = account.getAccountBalance();
+			System.out.println(x + ".     " + accountName + "..............$" + accountBalance);
+			System.out.println("___________________________________");
+			x++;
+		}
+	}
+//	public BankAccount customerChooseAccount(Customer customer) {
+//		int x = 1;
+//		for(BankAccount account : customer.getUserAccounts()) {
+//			System.out.println(x + ".       " + account.getAccountNumber());
+//		}
+//	}
+	
+	public void customerAccountMenuOptions(BankAccount account) {
+		System.out.println("Please select: \n+"
+				+ "1. View Recent Transactions \n+"
+				+ "2. Deposit \n+"
+				+ "3. Withdraw \n+"
+				+ "4. Transfer \n+"
+				+ "");
+	}
+	
 	
 }

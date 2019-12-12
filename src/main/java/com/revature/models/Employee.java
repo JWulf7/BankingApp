@@ -8,6 +8,9 @@ public class Employee extends User{
 		// personal info
 		// should be able to approve/deny open applications for accounts
 	
+	// To DO:
+	// write methods for transactions (deposit, withdraw, transfer) - should take in 1 account or customer, or 2 for transfer
+	
 	// constructors
 	Employee(){}
 	
