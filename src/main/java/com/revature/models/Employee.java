@@ -7,7 +7,7 @@ public class Employee extends User{
 		// account balances
 		// personal info
 		// should be able to approve/deny open applications for accounts
-	
+	public boolean isAdmin = false;
 	// To DO:
 	// write methods for transactions (deposit, withdraw, transfer) - should take in 1 account or customer, or 2 for transfer
 	

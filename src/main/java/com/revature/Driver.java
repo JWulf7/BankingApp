@@ -1,8 +1,10 @@
 package com.revature;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 
 import com.revature.models.Bank;
 import com.revature.models.BankAccount;
@@ -33,24 +35,25 @@ public class Driver {
 
 	}
 
-	public static void testCustomer() {
+	public static Customer testCustomer() {
 		Customer fred = new Customer();
 				BankAccount act1 = new BankAccount();
 				act1.setAccountNumber(12345678);
 				act1.setAccountBalance(805.12);
 				BankAccount act2 = new BankAccount();
-				act2.setAccountNumber(12345678);
-				act2.setAccountBalance(805.12);
+				act2.setAccountNumber(98765432);
+				act2.setAccountBalance(9652487.71);
 				fred.setAddress("123 Sesame Street");
 				fred.setApproved(true);
 				fred.setFirstName("Fred");
 				fred.setLastName("Clause");
 				fred.setPassword("Xmas123");
-				Set<BankAccount> useraccounts = new HashSet<>();
-				useraccounts.add(act1);
-				useraccounts.add(act2);
+				Map<Integer, BankAccount> useraccounts = new TreeMap<>();
+				useraccounts.put(1, act1);
+				useraccounts.put(2,act2);
 				fred.setUserAccounts(useraccounts);
 				fred.setUserName("Fred123");
+				return fred;
 	}
 	
 }

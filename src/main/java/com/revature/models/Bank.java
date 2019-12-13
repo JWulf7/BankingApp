@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.revature.Driver;
+
 public class Bank {
 
 	
@@ -33,8 +35,12 @@ public class Bank {
 					existingCustomerMainMenu(signInCustomer);
 					break;
 				case 2 :
-					existingUserLoginEmployee();
+					Employee signInEmployee = existingUserLoginEmployee();
+					
+					existingEmployeeMainMenu(signInEmployee);
 					break;
+				case 3 :
+					
 				}
 				break;
 			case "2" :
@@ -59,8 +65,8 @@ public class Bank {
 		System.out.println("=                                                                =");
 		System.out.println("=                                                                =");
 		System.out.println("=              Please select : 1. Existing Member                =");
-		System.out.println("=                  or          2. New User                       =");
-		System.out.println("=              or at any time  Q. Quit                           =");
+		System.out.println("=                              2. New User                       =");
+		System.out.println("=                              Q. Quit                           =");
 		System.out.println("==================================================================");
 	}
 	
@@ -87,21 +93,23 @@ public class Bank {
 	public int existingUserLogin1() {
 		System.out.println("Please select:   1. Customer");
 		System.out.println("       or        2. Employee");
+		System.out.println("       or        3. Admin");
 		Scanner scan = new Scanner(System.in);
 		//int employeeCheck = Integer.parseInt(scan.nextLine().split(" ")[0]);							// commented this out
 		int employeeCheck = Integer.parseInt(scan.nextLine().split(" ")[0]);					// new nextint
 		//scan.close();   														// new close
-		if(employeeCheck == 1 || employeeCheck == 2) {
+		if(employeeCheck == 1 || employeeCheck == 2 || employeeCheck == 3) {
 			//System.out.println("employee check returned a number");
 			//scan.close();														// new comment out
 			return employeeCheck;
 		}
 		else {
-			while(employeeCheck != 1 || employeeCheck != 2) {
+			while(employeeCheck != 1 || employeeCheck != 2 || employeeCheck != 3) {
 			//Scanner scan2 = new Scanner(System.in);
 			System.out.println("Please enter an appropriate selection:");
 			System.out.println("Please select:   1. Customer");
-			System.out.println("       or        2. Employee");						// vv~~~~~ commented this out
+			System.out.println("       or        2. Employee");		
+			System.out.println("       or        2. Admin");			// vv~~~~~ commented this out
 			//employeeCheck = Integer.parseInt(scan2.nextLine().split(" ")[0]);	// also created new scanner and renamed this line scan2
 			employeeCheck = Integer.parseInt(scan.nextLine().split(" ")[0]);
 			//scan2.close(); 														// new close
@@ -128,15 +136,16 @@ public class Bank {
 		thisCustomer.setPassword(loginPass);
 		//}
 		System.out.println("returned a customer object with username and password");
-		//scan.close();
-		return thisCustomer;
+		
+		/*return thisCustomer;      // THIS IS WHERE I NEED TO TAKE THE INFO GIVEN, AND GRAB CUSTOMER FROM DB
+		 for test, to undo... un comment above line, comment out below. */
+		return Driver.testCustomer();
 	}
 	
 	public Employee existingUserLoginEmployee() {
 		Employee thisEmployee = new Employee();
 		System.out.println("please enter your username:");
 		Scanner scan = new Scanner(System.in);
-		System.out.println("I think it good till here");
 		String loginName = scan.nextLine();
 		//scan.close(); 													// new close
 		
@@ -190,7 +199,10 @@ public class Bank {
 			if(input2.equals(input3)) {
 				customer.setPassword(input2);
 			} else {
-				System.out.println("Passwords did not match, please try again.");
+				while(!input2.equals(input3)) {
+					System.out.println("Passwords did not match, please try again.");
+					input3 = scan.nextLine();
+				}
 			}
 		}
 	//	scan.close();
@@ -279,8 +291,14 @@ public class Bank {
 		System.out.println("Welcome back, " + customer.getFirstName() + ".");
 		//System.out.println("\n");
 		System.out.println("Accounts:");
-		existingCustomerAcountsDisplay(customer);
+		BankAccount actSelect = existingCustomerAccountsDisplay(customer);
 		System.out.println("\n");
+		int typeOfTrans;
+		do {
+		typeOfTrans = customerAccountMenuOptions(actSelect);
+		doTransaction(actSelect, typeOfTrans);
+		
+		} while (typeOfTrans != 4);
 	}
 	
 	public void userFriendlyDate() {
@@ -290,18 +308,38 @@ public class Bank {
 		System.out.println(simpleDF.format(dateObj));
 	}
 	
-	public BankAccount existingCustomerAcountsDisplay(Customer customer) {
+	public BankAccount existingCustomerAccountsDisplay(Customer customer) {
 		System.out.println("________");
-		int x = 1;
 		System.out.println("Please select an account:");
-		for(BankAccount account : customer.getUserAccounts()) {
-			int accountName = account.getAccountNumber();
-			double accountBalance = account.getAccountBalance();
-			System.out.println(x + ".     " + accountName + "..............$" + accountBalance);
-			System.out.println("___________________________________");
-			x++;
+		for(int actSelect = 1; actSelect <= customer.getUserAccounts().size(); actSelect++) {
+			int accountName = customer.getUserAccounts().get(actSelect).getAccountNumber();
+			double accountBalance = customer.getUserAccounts().get(actSelect).getAccountBalance();
+			System.out.println(actSelect + ".      Acct. " + accountName + "............" + accountBalance);
+			System.out.println("__________________________________");
 		}
+		Scanner scan = new Scanner(System.in);
+		int acctChoice = Integer.parseInt(scan.nextLine().split(" ")[0]);
+		while((!(acctChoice >= 1)) || !((acctChoice <= customer.getUserAccounts().size()))) {
+			System.out.println("Please select a valid option.");
+			acctChoice = Integer.parseInt(scan.nextLine().split(" ")[0]);
+		}
+		return customer.getUserAccounts().get(acctChoice);
 	}
+	
+	
+	
+//	public BankAccount existingCustomerAcountsDisplay(Customer customer) {
+//		System.out.println("________");
+//		int x = 1;
+//		System.out.println("Please select an account:");
+//		for(BankAccount account : customer.getUserAccounts()) {
+//			int accountName = account.getAccountNumber();
+//			double accountBalance = account.getAccountBalance();
+//			System.out.println(x + ".     " + accountName + "..............$" + accountBalance);
+//			System.out.println("___________________________________");
+//			x++;
+//		}
+//	}
 //	public BankAccount customerChooseAccount(Customer customer) {
 //		int x = 1;
 //		for(BankAccount account : customer.getUserAccounts()) {
@@ -309,14 +347,124 @@ public class Bank {
 //		}
 //	}
 	
-	public void customerAccountMenuOptions(BankAccount account) {
-		System.out.println("Please select: \n+"
-				+ "1. View Recent Transactions \n+"
-				+ "2. Deposit \n+"
-				+ "3. Withdraw \n+"
-				+ "4. Transfer \n+"
+	public int customerAccountMenuOptions(BankAccount account) {
+		System.out.println("Acct. " + account.getAccountNumber() + " ..........$" + account.getAccountBalance() + "\n");
+		System.out.println("Please select: \n"
+				+ "1. Deposit \n"
+				+ "2. Withdraw \n"
+				+ "3. Transfer \n"
+				+ "4. Go Back \n"
+				+ "5. View Recent Transactions \n"
 				+ "");
+		Scanner scan = new Scanner(System.in);
+		int customerSelection = Integer.parseInt(scan.nextLine().split(" ")[0]);	
+		while((customerSelection < 1) || (customerSelection > 5)) {
+			System.out.println("Please select a valid option.");
+			customerSelection = Integer.parseInt(scan.nextLine().split(" ")[0]);	
+		}
+		System.out.println("returned customerSelection as an int");
+		return customerSelection;
 	}
 	
+	
+	public void doTransaction(BankAccount account, int transType) {
+		switch (transType) {
+		case 1 : 
+			System.out.println("How much would you like to deposit?");
+			Scanner scanD = new Scanner(System.in);
+			double amtD = Double.parseDouble(scanD.nextLine().split(" ")[0]);	
+			account.deposit(amtD);
+			System.out.println("You have deposited $" + amtD + "\nNew Balance: $" + account.getAccountBalance() );
+			break;
+		case 2 :
+			System.out.println("How much would you like to withdraw");
+			Scanner scanW = new Scanner(System.in);
+			double amtW = Double.parseDouble(scanW.nextLine().split(" ")[0]);
+			account.withdraw(amtW);
+			System.out.println("You have withdrawn $" + amtW + "\nNew Balance: $" + account.getAccountBalance());
+			break;
+		case 3 :
+			System.out.println("What account number will you transfer to?");
+			Scanner scanT = new Scanner(System.in);
+			int act2T2 = Integer.parseInt(scanT.nextLine().split(" ")[0]);
+			// THIS IS WHERE I NEED TO IMPLEMENT GRABBING AN ACCOUNT OBJECT BASED ON ACCOUNT NUMBER
+			// otherAccount is just a temporary place holder until i can search for an account on DB and return the 
+			// account based on acct number
+			BankAccount otherAccount = new BankAccount();
+			System.out.println("How much do you want to transfer?");
+			double amtT = Double.parseDouble(scanT.nextLine().split(" ")[0]);
+			account.transfer(amtT, otherAccount);
+		}
+	}
+	
+	
+	public void existingEmployeeMainMenu(Employee employee) {
+		userFriendlyDate();
+		System.out.println("Welcome back, " + employee.getFirstName() + ".");
+		//System.out.println("Accounts:");
+		//BankAccount actSelect = existingCustomerAccountsDisplay(customer);
+		System.out.println("\n");
+		System.out.println("Enter a customer to view their account:\n");
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Username:");
+		String custUN = scan.nextLine();
+		System.out.println("Last Name:");
+		String custLN = scan.nextLine();
+		System.out.println("First Name:");
+		String custFN = scan.nextLine();
+		Customer currentCust = new Customer(custUN, custLN, custFN);
+		/* THIS IS WHERE I NEED TO GRAB A CUSTOMER OBJECT FROM MY DATABASE GIVEN THE CURRENT INPUT*
+		 INSERTING A TEST CUSTOMER FOR TESTING PURPOSES~~~V
+		 */
+		currentCust = Driver.testCustomer();  // change this later when i grab a real one
+		employeeCustomerInfo(currentCust);
+		System.out.println("---------------------");
+		System.out.println("Please make a selection:");
+		int typeOfTrans;
+		
+		do {
+		typeOfTrans = employeeCustomerMenuOptions(currentCust);
+		//doTransaction(actSelect, typeOfTrans);
+			if(typeOfTrans == 1) {
+				setCustomerApproval(currentCust);
+				/*NEED TO SET APPROVAL HERE IN DB IMPLEMENTATION*/
+			}
+		} while (typeOfTrans != 2);
+	}
+	
+	public int employeeCustomerMenuOptions(Customer customer) {
+		System.out.println("1. Approve or Deny Customer");
+		System.out.println("2. Go Back");
+		Scanner scan = new Scanner(System.in);
+		return Integer.parseInt(scan.nextLine().split(" ")[0]);
+		
+	}
+	public void employeeCustomerInfo(Customer customer) {
+		System.out.println("Name: " + customer.getLastName() + ", " + customer.getFirstName());
+		System.out.println("Username: " + customer.getUserName());
+		System.out.println("Address: " + customer.getAddress());
+		System.out.println("Approved: " + customer.isApproved());
+		System.out.println("-----------------------------------");
+		System.out.println("Accounts:");
+		System.out.println("-----------");
+		for(int i = 1; i <= customer.getUserAccounts().size(); i++)
+			System.out.println(i +"- " + customer.getUserAccounts().get(i).getAccountNumber() + ".........$" + customer.getUserAccounts().get(i).getAccountBalance());
+		
+	}
+	public void setCustomerApproval(Customer customer) {
+		System.out.println("Current Approval Status: " + customer.isApproved());
+		System.out.println("1. Approve");
+		System.out.println("2. Deny");
+		Scanner scan = new Scanner(System.in);
+		int approveDeny = Integer.parseInt(scan.nextLine().split(" ")[0]);
+		while(!((approveDeny == 1) || (approveDeny == 2))) {
+			System.out.println("Please enter an appropriate selection");
+			approveDeny = Integer.parseInt(scan.nextLine().split(" ")[0]);
+		}
+		if(approveDeny == 1) {
+			customer.setApproved(true);
+		}
+		else customer.setApproved(false);
+	}
 	
 }

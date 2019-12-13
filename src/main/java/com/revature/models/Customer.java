@@ -27,8 +27,15 @@ public class Customer extends User{
 	
 	public Customer(String username, String pass) {
 		this();
-		this.userName = username;
-		this.password = pass;
+		this.setUserName(username);
+		this.setPassword(pass);
+	}
+	
+	public Customer(String username, String last, String first) {
+		this();
+		this.setUserName(username);
+		this.setLastName(last);
+		this.setFirstName(first);
 	}
 	
 	// transaction methods
@@ -93,11 +100,11 @@ public class Customer extends User{
 		this.address = address;
 	}
 
-	public Set<BankAccount> getUserAccounts() {
+	public Map<Integer, BankAccount> getUserAccounts() {
 		return userAccounts;
 	}
 
-	public void setUserAccounts(Set<BankAccount> userAccounts) {
+	public void setUserAccounts(Map<Integer, BankAccount> userAccounts) {
 		this.userAccounts = userAccounts;
 	}
 	
