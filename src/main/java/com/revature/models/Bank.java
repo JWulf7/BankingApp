@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 import com.revature.Driver;
+import com.revature.repositories.CustomersDAO;
+import com.revature.repositories.CustomersDAOImpl;
 
 public class Bank {
 
@@ -31,6 +33,9 @@ public class Bank {
 				switch (employeeCheck) {
 				case 1 :
 					Customer signInCustomer = existingUserLoginCustomer();
+					if(signInCustomer == null) {
+						break;
+					}
 					
 					existingCustomerMainMenu(signInCustomer);
 					break;
@@ -40,7 +45,9 @@ public class Bank {
 					existingEmployeeMainMenu(signInEmployee);
 					break;
 				case 3 :
+					Employee signInAdmin = existingUserLoginEmployee();			// might need to copy this method and just change it to return an admin.. but should be able to work with employee ref var
 					
+					existingAdminMainMenu(signInAdmin);
 				}
 				break;
 			case "2" :
@@ -92,8 +99,8 @@ public class Bank {
 	
 	public int existingUserLogin1() {
 		System.out.println("Please select:   1. Customer");
-		System.out.println("       or        2. Employee");
-		System.out.println("       or        3. Admin");
+		System.out.println("                 2. Employee");
+		System.out.println("                 3. Admin");
 		Scanner scan = new Scanner(System.in);
 		//int employeeCheck = Integer.parseInt(scan.nextLine().split(" ")[0]);							// commented this out
 		int employeeCheck = Integer.parseInt(scan.nextLine().split(" ")[0]);					// new nextint
@@ -108,8 +115,8 @@ public class Bank {
 			//Scanner scan2 = new Scanner(System.in);
 			System.out.println("Please enter an appropriate selection:");
 			System.out.println("Please select:   1. Customer");
-			System.out.println("       or        2. Employee");		
-			System.out.println("       or        2. Admin");			// vv~~~~~ commented this out
+			System.out.println("                 2. Employee");		
+			System.out.println("                 3. Admin");			// vv~~~~~ commented this out
 			//employeeCheck = Integer.parseInt(scan2.nextLine().split(" ")[0]);	// also created new scanner and renamed this line scan2
 			employeeCheck = Integer.parseInt(scan.nextLine().split(" ")[0]);
 			//scan2.close(); 														// new close
@@ -136,10 +143,22 @@ public class Bank {
 		thisCustomer.setPassword(loginPass);
 		//}
 		System.out.println("returned a customer object with username and password");
-		
+		CustomersDAO cDaoObj = new CustomersDAOImpl();
+		if (cDaoObj.customerExists(loginName)) {
+			Customer check = cDaoObj.getCustomerByUserName(loginName, loginPass);
+			if(check.getPassword().equals(loginPass)) {
+				thisCustomer = check;
+				return thisCustomer;
+			} else {
+				System.out.println("The password you provided was incorrect.");
+				return null;
+			}
+		} else {
+			System.out.println("Username is not valid.  Thank you.");
+		}
 		/*return thisCustomer;      // THIS IS WHERE I NEED TO TAKE THE INFO GIVEN, AND GRAB CUSTOMER FROM DB
 		 for test, to undo... un comment above line, comment out below. */
-		return Driver.testCustomer();
+		return null;
 	}
 	
 	public Employee existingUserLoginEmployee() {
@@ -354,7 +373,7 @@ public class Bank {
 				+ "2. Withdraw \n"
 				+ "3. Transfer \n"
 				+ "4. Go Back \n"
-				+ "5. View Recent Transactions \n"
+				+ "5. View Recent Transactions ** COMING SOON!**\n"
 				+ "");
 		Scanner scan = new Scanner(System.in);
 		int customerSelection = Integer.parseInt(scan.nextLine().split(" ")[0]);	
@@ -467,4 +486,84 @@ public class Bank {
 		else customer.setApproved(false);
 	}
 	
+	
+	public void existingAdminMainMenu(Employee employee) {
+		userFriendlyDate();
+		System.out.println("Welcome back, " + employee.getFirstName() + ".");
+		//System.out.println("Accounts:");
+		//BankAccount actSelect = existingCustomerAccountsDisplay(customer);
+		System.out.println("\n");
+		System.out.println("Enter a customer to view their account:\n");
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Username:");
+		String custUN = scan.nextLine();
+		System.out.println("Last Name:");
+		String custLN = scan.nextLine();
+		System.out.println("First Name:");
+		String custFN = scan.nextLine();
+		Customer currentCust = new Customer(custUN, custLN, custFN);
+		/* THIS IS WHERE I NEED TO GRAB A CUSTOMER OBJECT FROM MY DATABASE GIVEN THE CURRENT INPUT*
+		 INSERTING A TEST CUSTOMER FOR TESTING PURPOSES~~~V
+		 */
+		currentCust = Driver.testCustomer();  // change this later when i grab a real one
+		employeeCustomerInfo(currentCust);
+		System.out.println("---------------------");
+		System.out.println("Please make a selection:");
+		int typeOfTrans;
+		
+		do {
+		typeOfTrans = adminCustomerMenuOptions(currentCust);
+		//doTransaction(actSelect, typeOfTrans);
+			/*HERE I NEED TO INSERT AN IF STATEMENT
+			 *  WITH A CREATE BANKACCOUNT OPTION THAT <<<<<<~~~~~~~~~~~~~~~~~~~~~~HEREEREREHERHEHREHREHE
+			 * CREATES A NEW ACCOUNT AND 
+			 * DEPOSITS THE MIN INTO THE ACCOUNT*/
+			if(typeOfTrans == 4) {
+				// create account here
+				openAnAccount(currentCust);
+			}
+			if(typeOfTrans == 3) {
+				BankAccount whichAcct= existingCustomerAccountsDisplay(currentCust);
+				int trans;
+				do {
+					trans = customerAccountMenuOptions(whichAcct);
+					doTransaction(whichAcct, trans);
+				} while (trans != 4);
+				//existingCustomerMainMenu(currentCust);
+			}
+			if(typeOfTrans == 2) {
+				setCustomerApproval(currentCust);
+				/*NEED TO SET APPROVAL HERE IN DB IMPLEMENTATION*/
+			}
+		} while (typeOfTrans != 1);
+	}
+	
+	public int adminCustomerMenuOptions(Customer customer) {
+		System.out.println("1. Go Back");
+		System.out.println("2. Approve or Deny Customer");
+		System.out.println("3. Enter Accounts");
+		System.out.println("4. Open an Account");
+		Scanner scan = new Scanner(System.in);
+		return Integer.parseInt(scan.nextLine().split(" ")[0]);
+		
+	}
+	
+	public void openAnAccount(Customer customer) {
+		if (customer.isApproved()) {
+			BankAccount newAccount = new BankAccount();
+			// set newAccount to new account from Accounts table, set the account number
+			System.out.println("How much would you like to deposit?");
+			Scanner scanD = new Scanner(System.in);
+			double amtD = Double.parseDouble(scanD.nextLine().split(" ")[0]);
+			if (amtD >= 200) {
+				newAccount.deposit(amtD);
+				System.out.println("You have deposited $" + amtD + "\nNew Balance: $" + newAccount.getAccountBalance());
+			} else {
+				System.out.println(
+						"You must have deposit atleast $200 to meet the minimum requirement to open an account");
+			}
+		} else {
+			System.out.println("This customer is not approved yet.");
+		}
+	}
 }

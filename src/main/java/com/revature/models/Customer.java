@@ -38,6 +38,16 @@ public class Customer extends User{
 		this.setFirstName(first);
 	}
 	
+	public Customer(String userName, String userPassword, String firstName, String lastName, String address, boolean approved) {
+		this();
+		this.setUserName(userName);
+		this.setPassword(userPassword);
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setAddress(address);
+		this.setApproved(approved);
+	}
+	
 	// transaction methods
 	// deposit
 	//public?? because customer objects will not be instantiated here, so method will be accessible in the bank?
