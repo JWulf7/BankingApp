@@ -1,16 +1,17 @@
 package com.revature.models;
 
+import java.util.Queue;
+
 public class BankAccount {
 
-	// perhaps an array, so that 0000009 is not read as 9?? or could start first account at like 1000000
-		// private int[] accountNumber;
 	
-	// maybe also a list of transactions?
 	
 	
 		private int accountNumber;
 		private final int  MIN = 200;
 		private double accountBalance;
+		private String userName;
+		private Queue<String> recentTransactions;
 		
 	// constructors
 		public BankAccount(int number, double bal) {
@@ -22,6 +23,12 @@ public class BankAccount {
 		
 		public BankAccount(int number) {
 			this.accountNumber = number;
+		}
+		
+		public BankAccount(int num, double bal, String owner) {
+			this.setAccountNumber(num);
+			this.setAccountBalance(bal);
+			this.setUserName(owner);
 		}
 		
 		
@@ -47,17 +54,33 @@ public class BankAccount {
 		public int getMIN() {
 			return MIN;
 		}
+		public String getUserName() {
+			return userName;
+		}
+
+		public void setUserName(String userName) {
+			this.userName = userName;
+		}
+		
+		
+		
 	
+
+	public Queue<String> getRecentTransactions() {
+			return recentTransactions;
+		}
+
+		public void setRecentTransactions(Queue<String> recentTransactions) {
+			this.recentTransactions = recentTransactions;
+		}
 		
 		// transaction methods
-		
 	public void deposit(double amount) {
 		if (amount <= 0) {
 			System.out.println("you have to deposit a positive amount.");
 		} else {
 			this.setAccountBalance((this.getAccountBalance() + amount));
 			// probably need to add transaction to a list here too...
-			// also at this point, need to update database with new balance
 		}
 	}
 	
@@ -66,24 +89,20 @@ public class BankAccount {
 		if ((this.getAccountBalance() - this.getMIN()) >= amount) {
 			this.setAccountBalance((this.getAccountBalance() - amount));
 			// add transaction to a list here?
-			// also maybe a while loop that only allows sufficient funds?
-			// update database here to new balance
 		} else {
 			System.out.println("You do not have sufficient funds...");
 		}
 	}
 		
-	// transfer									//vv~~ not sure if this should be a bankaccount obj or just a number, probably an object, and in the actual implementation of the menu, i'll have to search for the bank account using its number in the database
 	public void transfer(double amount, BankAccount otherAcct) {
 				if((this.getAccountBalance() - this.getMIN()) >= amount) {
-					this.withdraw(amount);
 					otherAcct.deposit(amount);
-					// update both accounts on the database here
+					this.withdraw(amount);
 					
-					// need to finish this method with implementation
-					// here i should withdraw from current account and deposit into another account
-					// do i need to instantiate another customer what matches the otherAcctNum?.. then deposit into that Customers acct...
-					// then maybe transaction to lists of both customers... ?
+					// add transaction to a list here?
+				} else {
+					System.out.println("Transfer did not go through.\n" +
+							"Minimum balance required is $200");
 				}
 			
 		

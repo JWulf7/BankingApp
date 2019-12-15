@@ -96,3 +96,366 @@ org.postgresql.util.PSQLException: ERROR: relation "customers" does not exist
 	at com.revature.models.Bank.existingUserLoginCustomer(Bank.java:147)
 	at com.revature.models.Bank.startHere(Bank.java:35)
 	at com.revature.Driver.main(Driver.java:32)
+2019-12-13 23:47:21 WARN  CustomersDAOImpl:130 - Unable to register new customer information
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "customers_pkey"
+  Detail: Key (username)=(sample) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.CustomersDAOImpl.createCustomer(CustomersDAOImpl.java:124)
+	at com.revature.services.CustomerLogic.setNewUserFields(CustomerLogic.java:92)
+	at com.revature.services.Bank.startHere(Bank.java:63)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 10:53:43 WARN  CustomersDAOImpl:130 - Unable to register new customer information
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "customers_pkey"
+  Detail: Key (username)=(Sample) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.CustomersDAOImpl.createCustomer(CustomersDAOImpl.java:124)
+	at com.revature.services.CustomerLogic.setNewUserFields(CustomerLogic.java:92)
+	at com.revature.services.Bank.startHere(Bank.java:63)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 11:21:28 WARN  BankAccountsDAOImpl:137 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "account_number_sequence" does not exist
+  Where: PL/pgSQL function project0.set_accountnumber() line 3 at assignment
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:112)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 11:28:19 WARN  BankAccountsDAOImpl:137 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "account_number_sequence" does not exist
+  Where: PL/pgSQL function project0.set_accountnumber() line 3 at assignment
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:112)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 11:32:18 WARN  BankAccountsDAOImpl:137 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "bankaccounts" does not exist
+  Where: SQL statement "create sequence if not exists account_number_sequence
+		minvalue 100800600
+		no MAXVALUE
+		start with 100800600
+		no CYCLE
+		owned by bankaccounts.accountnumber"
+PL/pgSQL function project0.set_accountnumber() line 4 at SQL statement
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:112)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 11:47:06 WARN  BankAccountsDAOImpl:137 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "account_number_sequence" does not exist
+  Where: PL/pgSQL function project0.set_accountnumber() line 4 at assignment
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:112)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 11:52:23 WARN  BankAccountsDAOImpl:137 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "account_number_sequence" does not exist
+  Where: PL/pgSQL function project0.set_accountnumber() line 4 at assignment
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:112)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:17:53 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "bankaccounts" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:19:23 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: sequence must be in same schema as table it is linked to
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:26:37 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "IN"
+  Position: 31
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:27:22 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "DROP"
+  Position: 170
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:28:29 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "CREATE"
+  Position: 170
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:29:21 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "CREATE"
+  Position: 170
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:32:44 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "CREATE"
+  Position: 170
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:39:43 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "CREATE"
+  Position: 159
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:42:30 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "."
+  Position: 25
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:43:38 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: schema "account_number_sequence" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:45:30 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: syntax error at or near "."
+  Position: 25
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:48:53 WARN  BankAccountsDAOImpl:158 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "account_number_sequence" does not exist
+  Where: PL/pgSQL function project0.set_accountnumber() line 4 at assignment
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:133)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:54:51 WARN  BankAccountsDAOImpl:137 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "account_number_sequence" does not exist
+  Where: PL/pgSQL function project0.set_accountnumber() line 4 at assignment
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:112)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 12:57:11 WARN  BankAccountsDAOImpl:137 - Unable to open new account
+org.postgresql.util.PSQLException: ERROR: relation "account_number_sequence" does not exist
+  Where: PL/pgSQL function project0.set_accountnumber() line 4 at assignment
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.BankAccountsDAOImpl.createAccount(BankAccountsDAOImpl.java:112)
+	at com.revature.services.EmployeeAdminLogic.openAnAccount(EmployeeAdminLogic.java:174)
+	at com.revature.services.EmployeeAdminLogic.existingAdminMainMenu(EmployeeAdminLogic.java:144)
+	at com.revature.services.Bank.startHere(Bank.java:59)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 21:12:33 WARN  CustomersDAOImpl:130 - Unable to register new customer information
+org.postgresql.util.PSQLException: ERROR: null value in column "userpassword" violates not-null constraint
+  Detail: Failing row contains (!!!!!!!, null, 123, lastname, 123 , f).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.CustomersDAOImpl.createCustomer(CustomersDAOImpl.java:123)
+	at com.revature.services.CustomerLogic.setNewUserFields(CustomerLogic.java:92)
+	at com.revature.services.Bank.startHere(Bank.java:74)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 21:23:54 WARN  CustomersDAOImpl:130 - Unable to register new customer information
+org.postgresql.util.PSQLException: ERROR: value too long for type character varying(50)
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:147)
+	at com.revature.repositories.CustomersDAOImpl.createCustomer(CustomersDAOImpl.java:123)
+	at com.revature.services.CustomerLogic.setNewUserFields(CustomerLogic.java:92)
+	at com.revature.services.Bank.startHere(Bank.java:74)
+	at com.revature.Driver.main(Driver.java:32)
+2019-12-14 22:13:51 INFO  AccountsLogic:37 - 1576379573630: Acct. No. 100800610, Desposit: +$-1.0E131 , UserName: Fred123
+2019-12-14 22:15:06 INFO  AccountsLogic:37 - 1576379573630: Acct. No. 100800610, Desposit: +$-10.0 , UserName: Fred123
+2019-12-14 22:33:36 INFO  AccountsLogic:50 - 1576380295842: Acct. No. 100800790, Withdraw: +$-200.0 , UserName: .~~~0--=
+2019-12-14 22:34:33 INFO  AccountsLogic:50 - 1576380295842: Acct. No. 100800790, Withdraw: +$0.155 , UserName: .~~~0--=
+2019-12-14 22:34:46 INFO  AccountsLogic:41 - 1576380295842: Acct. No. 100800790, Desposit: +$2.3E-4 , UserName: .~~~0--=
+2019-12-14 22:35:19 INFO  AccountsLogic:70 - 1576380295842: From Acct. No. 100800790 To Acct. No. 100800790 , Transfer: $150.0
+2019-12-14 22:37:56 INFO  AccountsLogic:41 - 1576380295840: Acct. No. 100800790, Desposit: +$200.0 , UserName: .~~~0--=
+2019-12-14 22:38:03 INFO  AccountsLogic:41 - 1576380295840: Acct. No. 100800790, Desposit: +$2.0E-5 , UserName: .~~~0--=
+2019-12-14 23:06:33 INFO  AccountsLogic:42 - 1576382629127: Acct. No. 100800830, Desposit: +$0.0 , UserName: Bobby); DROP TABLES;
+2019-12-14 23:08:00 INFO  AccountsLogic:75 - 1576382629127: From Acct. No. 100800840 To Acct. No. 100800840 , Transfer: $9.999999999997919E-5
+2019-12-14 23:08:53 INFO  AccountsLogic:81 - 1576382629127: From Acct. No. 100800840 To Acct. No. 100800830 , Transfer: $1.734723475976807E-20
+2019-12-14 23:09:17 INFO  AccountsLogic:42 - 1576382629127: Acct. No. 100800840, Desposit: +$9.99999999999997E-5 , UserName: Bobby); DROP TABLES;
+2019-12-14 23:13:05 INFO  AccountsLogic:75 - 1576382629127: From Acct. No. 100800830 To Acct. No. 100800830 , Transfer: $3.1225022567582527E-19
+2019-12-14 23:13:21 INFO  AccountsLogic:42 - 1576382629127: Acct. No. 100800830, Desposit: +$9.999999999995837E-5 , UserName: Bobby); DROP TABLES;
+2019-12-14 23:22:56 INFO  AccountsLogic:42 - 1576383752785: Acct. No. 100800760, Desposit: +$199.99 , UserName: Fred123
+2019-12-14 23:23:40 INFO  AccountsLogic:42 - 1576383752785: Acct. No. 100800760, Desposit: +$0.01 , UserName: Fred123
+2019-12-14 23:23:48 INFO  AccountsLogic:42 - 1576383752785: Acct. No. 100800760, Desposit: +$199.99 , UserName: Fred123
+2019-12-14 23:30:54 INFO  AccountsLogic:42 - 1576384222782: Acct. No. 100800740, Desposit: +$800.88 , UserName: Fred123
+2019-12-14 23:31:34 INFO  AccountsLogic:42 - 1576384268536: Acct. No. 100800600, Desposit: +$0.5 , UserName: Fred123
+2019-12-14 23:31:44 INFO  AccountsLogic:42 - 1576384268536: Acct. No. 100800600, Desposit: +$0.0 , UserName: Fred123

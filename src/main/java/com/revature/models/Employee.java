@@ -12,12 +12,20 @@ public class Employee extends User{
 	// write methods for transactions (deposit, withdraw, transfer) - should take in 1 account or customer, or 2 for transfer
 	
 	// constructors
-	Employee(){}
+	public Employee(){}
 	
-	Employee(String username, String password) {
+	public Employee(String username, String password) {
 		this.setUserName(username);
 		this.setPassword(password);
 	}
-	
+	public Employee(String username) {
+		this.setUserName(username);
+	}
+	public Employee(String username, String password, String fName, String lname) {
+		this.setUserName(username);
+		this.setPassword(password);
+		this.setFirstName(fName);
+		this.setLastName(lname);
+	}
 	
 }

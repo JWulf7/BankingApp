@@ -25,6 +25,10 @@ public class Customer extends User{
 	// constructors
 	public Customer() {}
 	
+	public Customer(String username) {
+		this();
+		this.setUserName(username);
+	}
 	public Customer(String username, String pass) {
 		this();
 		this.setUserName(username);

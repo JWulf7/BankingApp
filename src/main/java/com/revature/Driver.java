@@ -1,14 +1,16 @@
 package com.revature;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 
-import com.revature.models.Bank;
 import com.revature.models.BankAccount;
 import com.revature.models.Customer;
+import com.revature.services.Bank;
 
 public class Driver {
 
@@ -24,10 +26,14 @@ public class Driver {
 					// if employee give them employee access
 					// if customer, give them access to view their account, transactions, and deposit, withdraw, and transfer
 				//Scanner scan = new Scanner(System.in);   				commented out
+		
+		
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+				LocalDateTime now = new LocalDateTime.now();
 				
 				Bank bank = new Bank();
 				//test customer.. take out later
-				testCustomer();
+				
 				
 				bank.startHere();
 				

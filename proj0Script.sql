@@ -1,7 +1,10 @@
 drop table if exists customers cascade;
-
+drop table if exists employeesAdmins cascade;
+drop table if exists bankAccounts CASCADE;
+drop table if exists transactions CASCADE;
+-- tables --
 create table customers (
-	userName VARCHAR (50) Primary key,
+	userName VARCHAR (50) Primary key UNIQUE,
 	userPassword varchar (50) not null,
 	firstName varchar (50) not null,
 	lastName varchar (50) not null,
@@ -10,7 +13,7 @@ create table customers (
 );
 
 
-drop table if exists employeesAdmins cascade;
+--drop table if exists employeesAdmins cascade;
 create table employeesAdmins (
 	userName VARCHAR (50) Primary key,
 	userPassword varchar (50) not null,
@@ -19,19 +22,65 @@ create table employeesAdmins (
 	isAdmin boolean not null
 );
 
-drop table if exists bankAccounts CASCADE;
+--drop table if exists bankAccounts CASCADE;
 create table bankAccounts (
+	--accountnumber int PRIMARY KEY,
 	accountNumber serial Primary key,
 	accountBalance numeric (50, 2) default 0,
 	userNam varchar (50) not null REFERENCES customers(userName)
 );
 
-drop table if exists transactions CASCADE;
+--drop table if exists transactions CASCADE;
 create table transactions (
 	transactionID serial PRIMARY KEY,
+	timeoccur VARCHAR (75),
 	accountNum int not null REFERENCES bankAccounts(accountNumber),
 	descript VARCHAR (50) not null
 );
+
+ALTER SEQUENCE bankaccounts_accountnumber_seq RESTART WITH 100800600 INCREMENT BY 10;
+
+
+-- function --
+create procedure exists transactionlog
+as 
+begin
+	insert into transactions (timeoccur)
+								values (select current_timestamp())
+end
+
+
+--create sequence if not exists account_number_sequence
+--	INCREMENT BY 10
+--	minvalue 100800600
+--	no MAXVALUE
+--	start with 100800600
+--	no CYCLE
+--	owned by bankaccounts.accountnumber;
+--	
+--create or replace function set_accountNumber() returns TRIGGER
+--AS
+--$$
+--	begin
+--
+--		new.accountnumber = nextval('account_number_sequence');
+--		return new;
+--	end;
+--$$ language plpgsql
+--
+--drop trigger if exists trg_account_number on bankaccounts;
+--
+--create trigger trg_account_number
+--before INSERT
+--on bankaccounts
+--	for each ROW
+--		execute procedure set_accountNumber();
+
+--testing--
+--insert into transactions (timeoccur, accountnum, descript)
+--	values ('2014:12:25:18:25:21', '100800720', 'Deposit 250');
+--insert into transactions (timeoccur, accountnum, descript)
+--	values ('2014:12:25:18:25:23', '100800730', 'Deposit 500');
 
 -- begin with a few players --
 insert into employeesAdmins (userName, userPassword, firstName, lastName, isAdmin)

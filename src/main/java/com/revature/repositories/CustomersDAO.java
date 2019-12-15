@@ -6,6 +6,8 @@ public interface CustomersDAO {
 
 	public Customer getCustomerByUserName(String userName, String password);
 	
+	public Customer getCustomerByUserNameOnly(String userName);
+	
 	public boolean updateCustomer(Customer customer);
 	
 	public boolean customerExists(String userName);

@@ -1,15 +1,21 @@
 package com.revature.repositories;
 
+import java.util.TreeMap;
+
 import com.revature.models.BankAccount;
 
 public interface BankAccountsDAO {
 	
 	public BankAccount getAccountFromNum(int accountNumber);
 	
-	public BankAccount getAccountFromUser(String userName);
+	public TreeMap<Integer, BankAccount> getAccountFromUser(String userName);
 	
-	public boolean updateAccount(double accountBalance);
+	public boolean updateAccount(int accountNumber, double accountBalance);
 	
-	public BankAccount createAccount(String userName);
+	public boolean createAccount(String userName);
+	
+	public BankAccount getNewAccount(String userName);
+	
+	public boolean deleteAccount(int accountNumber);
 
 }
