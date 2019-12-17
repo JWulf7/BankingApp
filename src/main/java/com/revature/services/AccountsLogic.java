@@ -32,12 +32,16 @@ public class AccountsLogic {
 			Scanner scanD = new Scanner(System.in);
 			double amtD = Double.parseDouble(scanD.nextLine().split(" ")[0]);
 			deposit(account, amtD);
+			tDAO.addTransaction(tLogic.transactionTime(), account.getAccountNumber(), "Deposit: +$" + amtD);
+			account.setRecentTransactions(tDAO.getTransactions(account.getAccountNumber()));
 			break;
 		case 2 :
 			System.out.println("How much would you like to withdraw");
 			Scanner scanW = new Scanner(System.in);
 			double amtW = Double.parseDouble(scanW.nextLine().split(" ")[0]);
 			withdraw(account, amtW);
+			tDAO.addTransaction(tLogic.transactionTime(), account.getAccountNumber(), "Withdraw: -$" + amtW);
+			account.setRecentTransactions(tDAO.getTransactions(account.getAccountNumber()));
 			break;
 		case 3 :
 			System.out.println("What account number will you transfer to?");
@@ -47,6 +51,10 @@ public class AccountsLogic {
 			System.out.println("How much do you want to transfer?");
 			double amtT = Double.parseDouble(scanT.nextLine().split(" ")[0]);
 			transfer(account, amtT, otherAccount);
+			tDAO.addTransaction(tLogic.transactionTime(), account.getAccountNumber(), "Outgoing Transaction: -$" + amtT);
+			tDAO.addTransaction(tLogic.transactionTime(), otherAccount.getAccountNumber(), "Incoming Transaction: +$" + amtT);
+			account.setRecentTransactions(tDAO.getTransactions(account.getAccountNumber()));
+			otherAccount.setRecentTransactions(tDAO.getTransactions(otherAccount.getAccountNumber()));
 			break;
 		}
 	}
@@ -64,8 +72,7 @@ public class AccountsLogic {
 		}
 		account.deposit(amtD);
 		baDAO.updateAccount(account.getAccountNumber(), account.getAccountBalance());
-		tDAO.addTransaction(tLogic.transactionTime(), account.getAccountNumber(), "Deposit: +$" + amtD);
-		account.setRecentTransactions(tDAO.getTransactions(account.getAccountNumber()));
+		
 		System.out.println("You have deposited $" + amtD + "\nNew Balance: $" + account.getAccountBalance() );
 		logger.info(time + ": Acct. No. " + account.getAccountNumber() + ", Desposit: +$" + amtD + " , UserName: " + account.getUserName());
 		return amtD;
@@ -85,8 +92,7 @@ public class AccountsLogic {
 		}
 		account.withdraw(amtW);
 		baDAO.updateAccount(account.getAccountNumber(), account.getAccountBalance());
-		tDAO.addTransaction(tLogic.transactionTime(), account.getAccountNumber(), "Withdraw: -$" + amtW);
-		account.setRecentTransactions(tDAO.getTransactions(account.getAccountNumber()));
+		
 		System.out.println("You have withdrawn $" + amtW + "\nNew Balance: $" + account.getAccountBalance());
 		logger.info(time + ": Acct. No. " + account.getAccountNumber() + ", Withdraw: +$" + amtW + " , UserName: " + account.getUserName());
 		return amtW;
@@ -115,10 +121,7 @@ public class AccountsLogic {
 		account.transfer(amtT, otherAccount);
 		baDAO.updateAccount(account.getAccountNumber(), account.getAccountBalance());
 		baDAO.updateAccount(otherAccount.getAccountNumber(), otherAccount.getAccountBalance());
-		tDAO.addTransaction(tLogic.transactionTime(), account.getAccountNumber(), "Outgoing Transaction: -$" + amtT);
-		tDAO.addTransaction(tLogic.transactionTime(), otherAccount.getAccountNumber(), "Incoming Transaction: +$" + amtT);
-		account.setRecentTransactions(tDAO.getTransactions(account.getAccountNumber()));
-		otherAccount.setRecentTransactions(tDAO.getTransactions(otherAccount.getAccountNumber()));
+	
 		logger.info(time + ": From Acct. No. " + account.getAccountNumber() + " To Acct. No. " + otherAccount.getAccountNumber() + " , Transfer: $" + amtT);
 		return amtT;
 	}

@@ -77,12 +77,14 @@ public class CustomerLogicTest {
 
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				userName = rs.getNString("username");
-				userPassword = rs.getNString("userpassword");
+				userName = rs.getString("username");
+				userPassword = rs.getString("userpassword");
 				customer.setUserName(userName);
 				customer.setPassword(userPassword);
-				assertNotNull(cLogic.existingCustomerCheck(customer, "TestUser", "Password1"));
+				
 			}
+			
+			assertNotNull(cLogic.existingCustomerCheck(customer, "TestUser", "Password1"));
 			rs.close();		
 		} catch (SQLException e) {
 			

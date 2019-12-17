@@ -43,8 +43,10 @@ public class EmployeeAdminLogicTest {
 	public void tearDown() throws Exception {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "DELETE from project0.employeesadmins where username = 'TestEmployee';" +
+			String sql = "DELETE from project0.employeesadmins WHERE username = 'TestEmployee';" +
 						"DELETE from project0.employeesadmins WHERE username = 'TestAdmin';" +
+						"DELETE from project0.bankaccounts WHERE usernam = 'TestUserTrue';" +
+						"DELETE from project0.bankaccounts WHERE usernam = 'TestUserFalse';" +
 						"DELETE from project0.customers WHERE username = 'TestUserTrue';" + 
 						"DELETE from project0.customers WHERE username = 'TestUserFalse';";
 			PreparedStatement stmt = conn.prepareStatement(sql);
