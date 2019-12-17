@@ -34,18 +34,7 @@ public class EmployeeAdminLogic {
 		String loginPass = scan.nextLine();								
 		thisEmployee.setPassword(loginPass);
 		
-		if(eaDAO.employeeExists(loginName)) {
-			Employee employee = eaDAO.getEmployee(loginName, loginPass);
-			if(employee.getPassword().equals(loginPass)) {
-				return employee;
-			}else {
-				System.out.println("Incorrect password");
-				
-			}
-		}else {
-			System.out.println("Cannot find employee in database");
-		}
-		return null;
+		return existingEmployeeCheck(loginName, loginPass);
 	}
 	
 	
@@ -78,14 +67,14 @@ public class EmployeeAdminLogic {
 					setCustomerApproval(currentCust);
 				}
 			} while (typeOfTrans != 2);
-		} else if(custUN.equals("Q")) {
+		} else if((custUN.equals("Q")) || (custUN.equals("q"))) {
 			System.out.println("Goodbye " + employee.getFirstName() +"!");
 			return;
 		}
 		else {
 			System.out.println("Could not find customer with that username.");
 		} 
-		 }while(!custUN.equals("Q"));
+		 }while((!custUN.equals("Q")) || (!custUN.equals("q")));
 	}
 	
 	
@@ -117,18 +106,13 @@ public class EmployeeAdminLogic {
 		System.out.println("2. Deny");
 		Scanner scan = new Scanner(System.in);
 		int approveDeny = Integer.parseInt(scan.nextLine().split(" ")[0]);
+		
 		while(!((approveDeny == 1) || (approveDeny == 2))) {
 			System.out.println("Please enter an appropriate selection");
 			approveDeny = Integer.parseInt(scan.nextLine().split(" ")[0]);
 		}
-		if(approveDeny == 1) {
-			customer.setApproved(true);
-			cDAO.updateCustomer(customer);
-		}
-		else {
-			customer.setApproved(false);
-			cDAO.updateCustomer(customer);
-		}
+		setApproval(customer, approveDeny);
+
 	}
 	
 	
@@ -179,13 +163,13 @@ public class EmployeeAdminLogic {
 					setCustomerApproval(currentCust);
 				}
 			} while (typeOfTrans != 1);
-		} else if(custUN.equals("Q")) {
+		} else if((custUN.equals("Q")) || (custUN.equals("q"))) {
 			System.out.println("Goodbye " + employee.getFirstName() + "!");
 			return;
 		} else {
 			System.out.println("Could not find customer with that username.");
 		}
-		} while(!custUN.equals("Q"));
+		} while((!custUN.equals("Q")) || (!custUN.equals("q")));
 
 	}
 	
@@ -206,22 +190,64 @@ public class EmployeeAdminLogic {
 			System.out.println("How much would you like to deposit?");
 			Scanner scanD = new Scanner(System.in);
 			double amtD = Double.parseDouble(scanD.nextLine().split(" ")[0]);
-			if (amtD >= 200) {
-				bDAO.createAccount(customer.getUserName());	
-			BankAccount newAccount = bDAO.getNewAccount(customer.getUserName());
-				bDAO.updateAccount(newAccount.getAccountNumber(), 0);
-				newAccount.deposit(amtD);
-				bDAO.updateAccount(newAccount.getAccountNumber(), newAccount.getAccountBalance());
-				System.out.println("You have deposited $" + amtD + "\nNew Balance: $" + newAccount.getAccountBalance());
-			} else {
-				System.out.println(
-						"You must have deposit atleast $200 to meet the minimum requirement to open an account");
-			}
+			openAnAccountCheck(customer, amtD);
+//			if (amtD >= 200) {
+//				bDAO.createAccount(customer.getUserName());	
+//			BankAccount newAccount = bDAO.getNewAccount(customer.getUserName());
+//				bDAO.updateAccount(newAccount.getAccountNumber(), 0);
+//				newAccount.deposit(amtD);
+//				bDAO.updateAccount(newAccount.getAccountNumber(), newAccount.getAccountBalance());
+//				System.out.println("You have deposited $" + amtD + "\nNew Balance: $" + newAccount.getAccountBalance());
+//			} else {
+//				System.out.println(
+//						"You must have deposit atleast $200 to meet the minimum requirement to open an account");
+//			}
 		} else {
 			System.out.println("This customer is not approved yet.");
 		}
 	}
 	
+	public Employee existingEmployeeCheck(String loginName, String password) {
+		if(eaDAO.employeeExists(loginName)) {
+			Employee employee = eaDAO.getEmployee(loginName);
+			if(employee.getPassword().equals(password)) {
+				return employee;
+			}else {
+				System.out.println("Incorrect password");
+				return null;
+			}
+		}else {
+			System.out.println("Cannot find employee in database");
+		}
+		return null;
+	}
 	
+	public boolean setApproval(Customer customer, int approveDeny) {
+		if(approveDeny == 1) {
+			customer.setApproved(true);
+			cDAO.updateCustomer(customer);
+			return true;
+		}
+		else {
+			customer.setApproved(false);
+			cDAO.updateCustomer(customer);
+			return false;
+		}
+	}
 	
+	public boolean openAnAccountCheck(Customer customer, double amtD) {
+		if (amtD >= 200) {
+			bDAO.createAccount(customer.getUserName());	
+		BankAccount newAccount = bDAO.getNewAccount(customer.getUserName());
+			bDAO.updateAccount(newAccount.getAccountNumber(), 0);
+			newAccount.deposit(amtD);
+			bDAO.updateAccount(newAccount.getAccountNumber(), newAccount.getAccountBalance());
+			System.out.println("You have deposited $" + amtD + "\nNew Balance: $" + newAccount.getAccountBalance());
+			return true;
+		} else {
+			System.out.println(
+					"You must have deposit atleast $200 to meet the minimum requirement to open an account");
+			return false;
+		}
+	}
 }

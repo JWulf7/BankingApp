@@ -17,5 +17,7 @@ public interface BankAccountsDAO {
 	public BankAccount getNewAccount(String userName);
 	
 	public boolean deleteAccount(int accountNumber);
+	
+	
 
 }

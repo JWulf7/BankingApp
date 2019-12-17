@@ -79,5 +79,42 @@ public class EmployeesAdminDAOImpl implements EmployeesAdminDAO{
 		}
 		return null;
 	}
+	
+	
+	@Override
+	public Employee getEmployee(String userName) {
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			// prepared statement
+			String sql = "SELECT * FROM project0.employeesadmins WHERE username = ?;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userName);
+			
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String dbUserName = rs.getString("username");
+				String userPassword = rs.getString("userpassword");
+				String firstName = rs.getString("firstname");
+				String lastName = rs.getString("lastname");
+				boolean admin = rs.getBoolean("isadmin");
+
+				if (admin) {
+					rs.close();
+					return new Admin(dbUserName, userPassword, firstName, lastName);
+				} else {
+					rs.close();
+					return new Employee(dbUserName, userPassword, firstName, lastName);
+				}
+				 
+			}
+			rs.close();
+		} catch (SQLException e) {
+			logger.warn("Unable to get Employee from database", e);
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

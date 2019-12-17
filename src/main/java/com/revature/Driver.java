@@ -28,14 +28,13 @@ public class Driver {
 				//Scanner scan = new Scanner(System.in);   				commented out
 		
 		
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-				LocalDateTime now = new LocalDateTime.now();
+				
 				
 				Bank bank = new Bank();
 				//test customer.. take out later
-				
-				
 				bank.startHere();
+				
+				
 				
 				//scan.close();											commented out
 

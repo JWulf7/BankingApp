@@ -8,4 +8,6 @@ public interface EmployeesAdminDAO {
 	
 	public Employee getEmployee(String userName, String password);
 	
+	public Employee getEmployee(String userName);
+	
 }

@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class BankAccount {
 
@@ -11,7 +12,7 @@ public class BankAccount {
 		private final int  MIN = 200;
 		private double accountBalance;
 		private String userName;
-		private Queue<String> recentTransactions;
+		private ArrayBlockingQueue<String> recentTransactions;
 		
 	// constructors
 		public BankAccount(int number, double bal) {
@@ -51,28 +52,27 @@ public class BankAccount {
 		public void setAccountBalance(double d) {
 			this.accountBalance = d;
 		}
+	
 		public int getMIN() {
 			return MIN;
 		}
+	
 		public String getUserName() {
 			return userName;
 		}
-
+	
 		public void setUserName(String userName) {
 			this.userName = userName;
 		}
-		
-		
-		
 	
-
-	public Queue<String> getRecentTransactions() {
+		public ArrayBlockingQueue<String> getRecentTransactions() {
 			return recentTransactions;
 		}
-
-		public void setRecentTransactions(Queue<String> recentTransactions) {
+	
+		public void setRecentTransactions(ArrayBlockingQueue<String> recentTransactions) {
 			this.recentTransactions = recentTransactions;
 		}
+		
 		
 		// transaction methods
 	public void deposit(double amount) {

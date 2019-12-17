@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import com.revature.Driver;
 import com.revature.models.Admin;
@@ -15,12 +16,15 @@ import com.revature.repositories.CustomersDAOImpl;
 
 public class Bank {
 
-	
+	public Bank(){
+		super();
+		//startHere();
+	}
 
 	CustomerLogic cLogic = new CustomerLogic();
 	AccountsLogic aLogic = new AccountsLogic();
 	EmployeeAdminLogic eaLogic = new EmployeeAdminLogic();
-	
+	static TransactionsLogic tLogic = new TransactionsLogic();
 	
 	
 	public void startHere() {
@@ -305,12 +309,12 @@ public class Bank {
 	
 	public static int customerAccountMenuOptions(BankAccount account) {
 		System.out.println("Acct. " + account.getAccountNumber() + " ..........$" + account.getAccountBalance() + "\n");
+		tLogic.transDisplay(account.getRecentTransactions());
 		System.out.println("Please select: \n"
 				+ "1. Deposit \n"
 				+ "2. Withdraw \n"
 				+ "3. Transfer \n"
 				+ "4. Go Back \n"
-				+ "5. View Recent Transactions ** COMING SOON!**\n"
 				+ "");
 		Scanner scan = new Scanner(System.in);
 		int customerSelection = Integer.parseInt(scan.nextLine().split(" ")[0]);	

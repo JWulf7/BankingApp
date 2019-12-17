@@ -42,12 +42,13 @@ ALTER SEQUENCE bankaccounts_accountnumber_seq RESTART WITH 100800600 INCREMENT B
 
 
 -- function --
-create procedure exists transactionlog
+create or replace function recentTransactions(acctNo int) returns setof transactions
 as 
-begin
-	insert into transactions (timeoccur)
-								values (select current_timestamp())
-end
+$$
+	select * from project0.transactions where accountnum = acctNo
+		order by timeoccur desc
+		limit 3;
+$$ language sql;
 
 
 --create sequence if not exists account_number_sequence
@@ -120,3 +121,6 @@ insert into bankAccounts (accountBalance, userNam)
 	values(10000.20, 'DarKnight');
 insert into bankAccounts (accountBalance, userNam)
 	values(700.00, 'DarKnight');
+
+	
+
