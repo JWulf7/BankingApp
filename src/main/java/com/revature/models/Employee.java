@@ -2,14 +2,7 @@ package com.revature.models;
 
 public class Employee extends User{
 
-	//should be able to view all customer info
-		// including bank account info
-		// account balances
-		// personal info
-		// should be able to approve/deny open applications for accounts
 	public boolean isAdmin = false;
-	// To DO:
-	// write methods for transactions (deposit, withdraw, transfer) - should take in 1 account or customer, or 2 for transfer
 	
 	// constructors
 	public Employee(){}
@@ -27,5 +20,34 @@ public class Employee extends User{
 		this.setFirstName(fName);
 		this.setLastName(lname);
 	}
+
+	@Override
+	public String toString() {
+		return "Employee [isAdmin=" + isAdmin + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (isAdmin ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (isAdmin != other.isAdmin)
+			return false;
+		return true;
+	}
+	
+	
 	
 }

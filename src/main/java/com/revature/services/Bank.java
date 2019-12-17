@@ -18,7 +18,6 @@ public class Bank {
 
 	public Bank(){
 		super();
-		//startHere();
 	}
 
 	CustomerLogic cLogic = new CustomerLogic();
@@ -28,7 +27,6 @@ public class Bank {
 	
 	
 	public void startHere() {
-		// welcomeScreen();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please press enter...");
 		String input = scan.nextLine().split(" ")[0];
@@ -37,10 +35,11 @@ public class Bank {
 			try {
 				input = scan.nextLine().split(" ")[0];
 				switch (input) {
+				// existing user login
 				case "1":
-					// scan.close(); // new close
 					int employeeCheck = existingUserLogin();
 					switch (employeeCheck) {
+					// existing customer login
 					case 1:
 						Customer signInCustomer = cLogic.existingUserLoginCustomer();
 						if (signInCustomer == null) {
@@ -49,12 +48,14 @@ public class Bank {
 
 						existingCustomerMainMenu(signInCustomer);
 						break;
+						// existing employee login
 					case 2:
 						Employee signInEmployee = eaLogic.existingUserLoginEmployee();
 						if (signInEmployee != null) {
 							eaLogic.existingEmployeeMainMenu(signInEmployee);
 						}
 						break;
+						// existing admin login
 					case 3:
 						try {
 							Admin signInAdmin = (Admin) eaLogic.existingUserLoginEmployee();
@@ -73,6 +74,7 @@ public class Bank {
 						break;
 					}
 					break;
+					// new customer register
 				case "2":
 					Customer newCust = createNewCustomer();
 					cLogic.setNewUserFields(newCust);
@@ -134,9 +136,7 @@ public class Bank {
 		if(employeeCheck == 1 || employeeCheck == 2 || employeeCheck == 3 || employeeCheck == 0) {
 			return employeeCheck;
 		}
-		//else if(employeeCheck == 0) {
-			
-		//}
+		
 		
 		else{
 			while(employeeCheck != 1 || employeeCheck != 2 || employeeCheck != 3) {
@@ -279,7 +279,6 @@ public class Bank {
 		}
 		
 		return customer.getUserAccounts().get(acctChoice);
-		//} while (acctChoice != 0);
 		}catch(NumberFormatException e) {
 			System.out.println("Invalid input.");
 			return null;
@@ -288,24 +287,6 @@ public class Bank {
 	
 	
 	
-//	public BankAccount existingCustomerAcountsDisplay(Customer customer) {
-//		System.out.println("________");
-//		int x = 1;
-//		System.out.println("Please select an account:");
-//		for(BankAccount account : customer.getUserAccounts()) {
-//			int accountName = account.getAccountNumber();
-//			double accountBalance = account.getAccountBalance();
-//			System.out.println(x + ".     " + accountName + "..............$" + accountBalance);
-//			System.out.println("___________________________________");
-//			x++;
-//		}
-//	}
-//	public BankAccount customerChooseAccount(Customer customer) {
-//		int x = 1;
-//		for(BankAccount account : customer.getUserAccounts()) {
-//			System.out.println(x + ".       " + account.getAccountNumber());
-//		}
-//	}
 	
 	public static int customerAccountMenuOptions(BankAccount account) {
 		System.out.println("Acct. " + account.getAccountNumber() + " ..........$" + account.getAccountBalance() + "\n");

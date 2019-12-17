@@ -303,8 +303,4 @@ Logger logger = Logger.getLogger(AccountsLogicTest.class);
 		}
 	}
 	
-//	@Test
-//	public void testAWord() {
-//		assertEquals("tobor", evaluationService.reverse("robot"));
-//	}
 }

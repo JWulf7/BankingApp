@@ -122,7 +122,7 @@ insert into bankAccounts (accountBalance, userNam)
 insert into bankAccounts (accountBalance, userNam)
 	values(700.00, 'DarKnight');
 
-DELETE from project0.customers WHERE username = 'TestUserTrue';
-DELETE from project0.bankaccounts WHERE usernam = 'TestUserTrue';
-DELETE from project0.customers WHERE username = 'TestUserFalse';
+--DELETE from project0.customers WHERE username = 'TestUserTrue';
+--DELETE from project0.bankaccounts WHERE usernam = 'TestUserTrue';
+--DELETE from project0.customers WHERE username = 'TestUserFalse';
 

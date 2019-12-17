@@ -100,7 +100,7 @@ public class BankAccountsDAOImpl implements BankAccountsDAO{
 
 	}
 
-	@Override	// break this into 2 methods
+	@Override	
 	public boolean createAccount(String userName) {
 
 		try (Connection conn = ConnectionUtil.getConnection()) {

@@ -75,38 +75,87 @@ public class BankAccount {
 		
 		
 		// transaction methods
-	public void deposit(double amount) {
+	public double deposit(double amount) {
 		if (amount <= 0) {
 			System.out.println("you have to deposit a positive amount.");
+			return 0;
 		} else {
 			this.setAccountBalance((this.getAccountBalance() + amount));
-			// probably need to add transaction to a list here too...
+			return amount;
 		}
 	}
 	
 	
-	public void withdraw(double amount) {
+	public double withdraw(double amount) {
 		if ((this.getAccountBalance() - this.getMIN()) >= amount) {
 			this.setAccountBalance((this.getAccountBalance() - amount));
-			// add transaction to a list here?
+			return amount;
 		} else {
 			System.out.println("You do not have sufficient funds...");
+			return 0;
 		}
 	}
 		
-	public void transfer(double amount, BankAccount otherAcct) {
+	public double transfer(double amount, BankAccount otherAcct) {
 				if((this.getAccountBalance() - this.getMIN()) >= amount) {
 					otherAcct.deposit(amount);
 					this.withdraw(amount);
-					
-					// add transaction to a list here?
+					return amount;
 				} else {
 					System.out.println("Transfer did not go through.\n" +
 							"Minimum balance required is $200");
+					return 0;
 				}
-			
-		
+	}
+
+	@Override
+	public String toString() {
+		return "BankAccount [accountNumber=" + accountNumber + ", MIN=" + MIN + ", accountBalance=" + accountBalance
+				+ ", userName=" + userName + ", recentTransactions=" + recentTransactions + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + MIN;
+		long temp;
+		temp = Double.doubleToLongBits(accountBalance);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + accountNumber;
+		result = prime * result + ((recentTransactions == null) ? 0 : recentTransactions.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BankAccount other = (BankAccount) obj;
+		if (MIN != other.MIN)
+			return false;
+		if (Double.doubleToLongBits(accountBalance) != Double.doubleToLongBits(other.accountBalance))
+			return false;
+		if (accountNumber != other.accountNumber)
+			return false;
+		if (recentTransactions == null) {
+			if (other.recentTransactions != null)
+				return false;
+		} else if (!recentTransactions.equals(other.recentTransactions))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
 	}	
+	
 	
 	
 	

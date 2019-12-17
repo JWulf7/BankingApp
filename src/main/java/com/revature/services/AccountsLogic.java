@@ -19,12 +19,12 @@ public class AccountsLogic {
 	
 	Date date = new Date();
 	long time = date.getTime();
-	//Timestamp ts = new Timestamp(time);
 	private static Logger logger = Logger.getLogger(AccountsLogic.class);
 	BankAccountsDAO baDAO = new BankAccountsDAOImpl();
 	TransactionsDAO tDAO = new TransactionsDAOImpl();
 	TransactionsLogic tLogic = new TransactionsLogic();
 	
+	//transactions menu
 	public void doTransaction(BankAccount account, int transType) {
 		switch (transType) {
 		case 1 : 

@@ -8193,3 +8193,30 @@ org.postgresql.util.PSQLException: ERROR: insert or update on table "transaction
 2019-12-17 10:09:42 INFO  AccountsLogic:77 - 1576595382165: Acct. No. 0, Desposit: +$80.0 , UserName: null
 2019-12-17 10:09:42 INFO  AccountsLogic:77 - 1576595382272: Acct. No. 0, Desposit: +$0.25 , UserName: null
 2019-12-17 10:09:42 INFO  AccountsLogic:113 - 1576595382445: From Acct. No. 0 To Acct. No. 0 , Transfer: $999999.0
+2019-12-17 10:40:31 INFO  AccountsLogic:77 - 1576597210239: Acct. No. 100800760, Desposit: +$45.0 , UserName: Fred123
+2019-12-17 10:41:26 INFO  AccountsLogic:125 - 1576597210239: From Acct. No. 100800760 To Acct. No. 100800730 , Transfer: $15.0
+2019-12-17 11:11:49 INFO  AccountsLogic:97 - 1576599109891: Acct. No. 0, Withdraw: +$150.0 , UserName: null
+2019-12-17 11:11:50 INFO  AccountsLogic:113 - 1576599110053: From Acct. No. 0 To Acct. No. 0 , Transfer: $200.0
+2019-12-17 11:11:50 INFO  AccountsLogic:77 - 1576599110123: Acct. No. 0, Desposit: +$80.0 , UserName: null
+2019-12-17 11:11:50 INFO  AccountsLogic:77 - 1576599110223: Acct. No. 0, Desposit: +$0.25 , UserName: null
+2019-12-17 11:11:50 INFO  AccountsLogic:113 - 1576599110400: From Acct. No. 0 To Acct. No. 0 , Transfer: $999999.0
+2019-12-17 15:04:46 INFO  AccountsLogic:97 - 1576613086769: Acct. No. 0, Withdraw: +$150.0 , UserName: null
+2019-12-17 15:04:46 INFO  AccountsLogic:113 - 1576613086937: From Acct. No. 0 To Acct. No. 0 , Transfer: $200.0
+2019-12-17 15:04:47 INFO  AccountsLogic:77 - 1576613087006: Acct. No. 0, Desposit: +$80.0 , UserName: null
+2019-12-17 15:04:47 INFO  AccountsLogic:77 - 1576613087096: Acct. No. 0, Desposit: +$0.25 , UserName: null
+2019-12-17 15:04:47 INFO  AccountsLogic:113 - 1576613087283: From Acct. No. 0 To Acct. No. 0 , Transfer: $999999.0
+2019-12-17 15:05:09 INFO  AccountsLogic:97 - 1576613109022: Acct. No. 0, Withdraw: +$150.0 , UserName: null
+2019-12-17 15:05:09 INFO  AccountsLogic:113 - 1576613109294: From Acct. No. 0 To Acct. No. 0 , Transfer: $200.0
+2019-12-17 15:05:09 INFO  AccountsLogic:77 - 1576613109359: Acct. No. 0, Desposit: +$80.0 , UserName: null
+2019-12-17 15:05:09 INFO  AccountsLogic:77 - 1576613109446: Acct. No. 0, Desposit: +$0.25 , UserName: null
+2019-12-17 15:05:09 INFO  AccountsLogic:113 - 1576613109608: From Acct. No. 0 To Acct. No. 0 , Transfer: $999999.0
+2019-12-17 15:05:27 INFO  AccountsLogic:97 - 1576613127813: Acct. No. 0, Withdraw: +$150.0 , UserName: null
+2019-12-17 15:05:28 INFO  AccountsLogic:113 - 1576613127980: From Acct. No. 0 To Acct. No. 0 , Transfer: $200.0
+2019-12-17 15:05:28 INFO  AccountsLogic:77 - 1576613128056: Acct. No. 0, Desposit: +$80.0 , UserName: null
+2019-12-17 15:05:28 INFO  AccountsLogic:77 - 1576613128146: Acct. No. 0, Desposit: +$0.25 , UserName: null
+2019-12-17 15:05:28 INFO  AccountsLogic:113 - 1576613128324: From Acct. No. 0 To Acct. No. 0 , Transfer: $999999.0
+2019-12-17 15:12:51 INFO  AccountsLogic:97 - 1576613571461: Acct. No. 0, Withdraw: +$150.0 , UserName: null
+2019-12-17 15:12:51 INFO  AccountsLogic:113 - 1576613571632: From Acct. No. 0 To Acct. No. 0 , Transfer: $200.0
+2019-12-17 15:12:51 INFO  AccountsLogic:77 - 1576613571706: Acct. No. 0, Desposit: +$80.0 , UserName: null
+2019-12-17 15:12:51 INFO  AccountsLogic:77 - 1576613571805: Acct. No. 0, Desposit: +$0.25 , UserName: null
+2019-12-17 15:12:51 INFO  AccountsLogic:113 - 1576613571977: From Acct. No. 0 To Acct. No. 0 , Transfer: $999999.0

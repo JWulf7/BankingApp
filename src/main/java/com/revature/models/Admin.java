@@ -2,10 +2,6 @@ package com.revature.models;
 
 public class Admin extends Employee{
 
-	//should be able to view and manipulate all User fields
-	// should be able to approve users to open accounts
-	// cancel accounts
-	// perform all transactions without restrictions
 	
 	public boolean isAdmin = true;
 
@@ -23,4 +19,33 @@ public class Admin extends Employee{
 		this.setFirstName(fname);
 		this.setLastName(lname);
 	}
+
+	@Override
+	public String toString() {
+		return "Admin [isAdmin=" + isAdmin + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isAdmin ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Admin other = (Admin) obj;
+		if (isAdmin != other.isAdmin)
+			return false;
+		return true;
+	}
+	
+	
 }

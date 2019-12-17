@@ -121,11 +121,7 @@ public class CustomersDAOImpl implements CustomersDAO{
 			stmt.setBoolean(6, customer.isApproved());
 			
 			return stmt.execute();
-//			if(!stmt.execute()) {
-//				return false;
-//			}
-//
-//			return true;
+
 		} catch (SQLException e) {
 			logger.warn("Unable to register new customer information", e);
 			e.printStackTrace();

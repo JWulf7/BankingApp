@@ -85,9 +85,7 @@ public Customer existingUserLoginCustomer() {
 			}
 		}
 		newCustomer.setApproved(false);
-		//
 		cDAO.createCustomer(newCustomer);
-		//
 		System.out.println(
 				"Your account is pending... admin will contact you when your account is approved or denied. \nThank You");
 		System.out.println("Press enter to exit");

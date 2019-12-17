@@ -10,10 +10,6 @@ import com.revature.models.BankAccount;
 
 public class Customer extends User{
 
-	// To DO:
-	// write methods for doing transactions(deposit, withdrawl, transfer)
-	// also write queue with capacity?? for latest (5?) transactions??
-	// maybe full list of transactions also?
 	
 	//customer fields
 	private boolean approved = false;
@@ -52,48 +48,6 @@ public class Customer extends User{
 		this.setApproved(approved);
 	}
 	
-	// transaction methods
-	// deposit
-	//public?? because customer objects will not be instantiated here, so method will be accessible in the bank?
-//	public void deposit(int amount, int acctnum) {
-//		if(amount <= 0) {
-//			System.out.println("you have to deposit a positive amount.");
-//		} else {
-//			for(BankAccount acct : userAccounts) {
-//				if(acct.getAccountNumber() == acctnum) {
-//					acct.setAccountBalance((acct.getAccountBalance() + amount));
-//					// probably need to add transaction to a list here too...
-//				}
-//			}
-//		}
-//	}
-	// withdraw
-//	public void withdraw(double amount, int acctnum) {
-//		for(BankAccount acct : userAccounts) {
-//			if(acct.getAccountNumber() == acctnum) {
-//				if((acct.getAccountBalance() - acct.getMIN()) >= amount) {
-//					acct.setAccountBalance((acct.getAccountBalance() - amount));
-//					// add transaction to a list here?
-//					// also maybe a while loop that only allows sufficient funds?
-//				} else {
-//					System.out.println("You do not have sufficient funds...");
-//				}
-//			}
-//		}
-//	}
-	// transfer
-//	public void transfer(int amount, int thisAcctNum, int otherAcctNum ) {
-//		for(BankAccount acct : userAccounts) {
-//			if(acct.getAccountNumber() == thisAcctNum) {
-//				if((acct.getAccountBalance() - acct.getMIN()) >= amount) {
-//					// need to finish this method with implementation
-//					// here i should withdraw from current account and deposit into another account
-//					// do i need to instantiate another customer what matches the otherAcctNum?.. then deposit into that Customers acct...
-//					// then maybe transaction to lists of both customers... ?
-//				}
-//			}
-//		}
-//	}
 	
 	
 	
@@ -120,6 +74,45 @@ public class Customer extends User{
 
 	public void setUserAccounts(Map<Integer, BankAccount> userAccounts) {
 		this.userAccounts = userAccounts;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [approved=" + approved + ", address=" + address + ", userAccounts=" + userAccounts + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + (approved ? 1231 : 1237);
+		result = prime * result + ((userAccounts == null) ? 0 : userAccounts.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (approved != other.approved)
+			return false;
+		if (userAccounts == null) {
+			if (other.userAccounts != null)
+				return false;
+		} else if (!userAccounts.equals(other.userAccounts))
+			return false;
+		return true;
 	}
 	
 	

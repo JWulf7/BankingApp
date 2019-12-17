@@ -20,7 +20,7 @@ public class EmployeeAdminLogic {
 	CustomersDAO cDAO = new CustomersDAOImpl();
 	EmployeesAdminDAO eaDAO = new EmployeesAdminDAOImpl();
 	BankAccountsDAO bDAO = new BankAccountsDAOImpl();
-	//Bank bank = new Bank();
+	
 	
 	public Employee existingUserLoginEmployee() {
 		Employee thisEmployee = new Employee();
@@ -136,7 +136,6 @@ public class EmployeeAdminLogic {
 
 			do {
 				currentCust = cLogic.grabWholeCustomer(currentCust.getUserName(), currentCust.getPassword());
-				// above is trial to update to get newly opened account
 				employeeCustomerInfo(currentCust);
 			System.out.println("---------------------");
 			System.out.println("Please make a selection:");
@@ -191,17 +190,6 @@ public class EmployeeAdminLogic {
 			Scanner scanD = new Scanner(System.in);
 			double amtD = Double.parseDouble(scanD.nextLine().split(" ")[0]);
 			openAnAccountCheck(customer, amtD);
-//			if (amtD >= 200) {
-//				bDAO.createAccount(customer.getUserName());	
-//			BankAccount newAccount = bDAO.getNewAccount(customer.getUserName());
-//				bDAO.updateAccount(newAccount.getAccountNumber(), 0);
-//				newAccount.deposit(amtD);
-//				bDAO.updateAccount(newAccount.getAccountNumber(), newAccount.getAccountBalance());
-//				System.out.println("You have deposited $" + amtD + "\nNew Balance: $" + newAccount.getAccountBalance());
-//			} else {
-//				System.out.println(
-//						"You must have deposit atleast $200 to meet the minimum requirement to open an account");
-//			}
 		} else {
 			System.out.println("This customer is not approved yet.");
 		}
